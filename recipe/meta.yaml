@@ -2,6 +2,7 @@
 {% set version = "6.23.0" %}
 {% set sha256 = "e2c749ad3f326ef212f25f8f06d7a85a87903efeaf1f13163da40e27bde9f16e" %}
 
+# lalsuite versions
 {% set lal_version = "6.19.2" %}
 {% set lalburst_version = "1.5.1" %}
 {% set lalframe_version = "1.4.0" %}
@@ -10,6 +11,15 @@
 {% set lalmetaio_version = "1.5.0" %}
 {% set lalpulsar_version = "1.17.1" %}
 {% set lalsimulation_version = "1.8.2" %}
+
+# build number
+{% set build = 1 %}
+
+# set default build and build number based on mpi request
+{% set mpi = mpi or 'nompi' %}
+{% if mpi == 'openmpi' %}
+{% set build = build + 100 %}
+{% endif %}
 
 package:
   name: {{ name }}
@@ -26,8 +36,14 @@ source:
     - searchsum2cache.patch
 
 build:
-  number: 1
+  number: {{ build }}
   skip: true  # [win]
+  {% if mpi != 'nompi' %}
+  {% set mpi_prefix = "mpi_" + mpi %}
+  {% else %}
+  {% set mpi_prefix = "nompi" %}
+  {% endif %}
+  string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
 
 requirements:
   build:
@@ -48,7 +64,7 @@ requirements:
     - lalsimulation >={{ lalsimulation_version }}
     - libframe
     - metaio
-    - openmpi
+    - {{ mpi }}  # [mpi != "nompi"]
     - python
     - python-lal >={{ lal_version }}
     - python-lalburst >={{ lalburst_version }}
@@ -75,7 +91,7 @@ requirements:
     - libframe
     - ligo-segments
     - metaio
-    - openmpi
+    - {{ mpi }}  # [mpi != "nompi"]
     - numpy
     - pillow
     - python
