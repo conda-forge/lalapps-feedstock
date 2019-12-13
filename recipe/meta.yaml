@@ -39,6 +39,7 @@ build:
 
 requirements:
   build:
+    - bc
     - {{ compiler('c') }}
     - help2man
     - make
