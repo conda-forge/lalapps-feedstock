@@ -12,11 +12,9 @@ ${SRC_DIR}/configure \
 	--prefix=${PREFIX} \
 	--disable-gcc-flags \
 	--enable-cfitsio \
+	--enable-help2man \
 	--enable-openmp \
-	--enable-mpi \
-	MPICC=${PREFIX}/bin/mpicc \
-	MPICXX=${PREFIX}/bin/mpicxx \
-	MPIFC=${PREFIX}/bin/mpifc
+;
 
 # build
 make -j ${CPU_COUNT}

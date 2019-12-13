@@ -1,0 +1,54 @@
+From 30731d7079076831081f584eaf01b01a091ce2db Mon Sep 17 00:00:00 2001
+From: Duncan Macleod <duncan.macleod@ligo.org>
+Date: Thu, 12 Dec 2019 13:14:58 +0000
+Subject: [PATCH 2/2] lalapps: fix py3 issues in lalapps_cbc_sbank_pipe
+
+---
+ lalapps/src/inspiral/lalapps_cbc_sbank_pipe.py | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/lalapps/src/inspiral/lalapps_cbc_sbank_pipe.py b/lalapps/src/inspiral/lalapps_cbc_sbank_pipe.py
+index 1941f2e678..339424f00b 100644
+--- a/src/inspiral/lalapps_cbc_sbank_pipe.py
++++ b/src/inspiral/lalapps_cbc_sbank_pipe.py
+@@ -18,8 +18,8 @@ from __future__ import print_function
+ 
+ ##############################################################################
+ # import standard modules and append the lalapps prefix to the python path
+-import sys, os, shutil
+-from itertools import cycle, izip
++import sys, os
++from itertools import cycle
+ import subprocess, socket, tempfile
+ 
+ ##############################################################################
+@@ -92,7 +92,7 @@ class SBankJob(inspiral.InspiralAnalysisJob):
+         if cp.has_section("accounting"):
+             self.add_condor_cmd('accounting_group', cp.get("accounting", "accounting-group"))
+             if cp.has_option("accounting", "accounting-group-user"):
+-		self.add_condor_cmd('accounting_group_user', cp.get("accounting", "accounting-group-user"))
++                self.add_condor_cmd('accounting_group_user', cp.get("accounting", "accounting-group-user"))
+         self.add_condor_cmd('getenv','True')
+         self.add_condor_cmd('request_memory', '3999')
+         if "OMP_NUM_THREADS" in os.environ:
+@@ -134,7 +134,7 @@ class SBankChooseMchirpBoundariesJob(inspiral.InspiralAnalysisJob):
+         if cp.has_section("accounting"):
+             self.add_condor_cmd('accounting_group', cp.get("accounting", "accounting-group"))
+             if cp.has_option("accounting", "accounting-group-user"):
+-		self.add_condor_cmd('accounting_group_user', cp.get("accounting", "accounting-group-user"))
++                self.add_condor_cmd('accounting_group_user', cp.get("accounting", "accounting-group-user"))
+         self.add_condor_cmd('getenv','True')
+ 
+ 
+@@ -172,7 +172,7 @@ class LWAddJob(pipeline.CondorDAGJob):
+         if cp.has_section("accounting"):
+             self.add_condor_cmd('accounting_group', cp.get("accounting", "accounting-group"))
+             if cp.has_option("accounting", "accounting-group-user"):
+-		self.add_condor_cmd('accounting_group_user', cp.get("accounting", "accounting-group-user"))
++                self.add_condor_cmd('accounting_group_user', cp.get("accounting", "accounting-group-user"))
+         self.tag_base = tag_base
+         self.add_condor_cmd('environment',"KMP_LIBRARY=serial;MKL_SERIAL=yes")
+         self.set_sub_file(tag_base+'.sub')
+-- 
+2.23.0
+
