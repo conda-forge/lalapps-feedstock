@@ -131,9 +131,9 @@ test:
     - lalapps_cbc_sbank_choose_mchirp_boundaries --help
     - lalapps_cbc_sbank_hdf5_bankcombiner --help
     - lalapps_cbc_sbank_hdf5_choose_mchirp_boundaries --help
-    - lalapps_cbc_sbank_pipe --help
+    - TMPDIR="." lalapps_cbc_sbank_pipe --help
     - lalapps_cbc_sbank_sim --help
-    - lalapps_cbc_sbank_sim_pipe --help
+    - TMPDIR="." lalapps_cbc_sbank_sim_pipe --help
     - lalapps_cbc_stochasticbank --help
     - lalapps_chirplen --m1 1.4 --m2 1.4 --flow 30
     - lalapps_coh_PTF_inspiral --help
