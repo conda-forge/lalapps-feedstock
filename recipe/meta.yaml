@@ -41,7 +41,6 @@ requirements:
   build:
     - {{ compiler('c') }}
     - help2man
-    - llvm-openmp  # [osx]
     - make
     - pkg-config
   host:
@@ -59,7 +58,6 @@ requirements:
     - lalsimulation >={{ lalsimulation_version }}
     - libframe
     - ligo-segments
-    - llvm-openmp  # [osx]
     - metaio
     - numpy
     - pillow
@@ -88,7 +86,6 @@ requirements:
     - lalinference >={{ lalinference_version }}
     - libframe
     - ligo-segments
-    - llvm-openmp  # [osx]
     - metaio
     - numpy
     - pillow

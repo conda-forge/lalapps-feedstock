@@ -13,7 +13,6 @@ ${SRC_DIR}/configure \
 	--disable-gcc-flags \
 	--enable-cfitsio \
 	--enable-help2man \
-	--enable-openmp \
 ;
 
 # build
