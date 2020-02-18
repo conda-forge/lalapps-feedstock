@@ -35,7 +35,7 @@ build:
     # run_exports parsing for fftw is broken, so we ignore it
     # manually, for now
     - fftw
-  number: 1
+  number: 2
   skip: true  # [win]
 
 requirements:
@@ -223,7 +223,7 @@ about:
   home: "https://wiki.ligo.org/Computing/LALSuite"
   dev_url: "https://git.ligo.org/lscsoft/lalsuite/"
   doc_url: "https://docs.ligo.org/lscsoft/lalsuite/lalapps/"
-  license: "GPL-3.0-or-later"
+  license: "GPL-2.0-or-later"
   license_family: "GPL"
   license_file: "COPYING"
   summary: "LSC Algorithm Library Applications"
