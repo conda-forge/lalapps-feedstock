@@ -35,6 +35,8 @@ build:
     # run_exports parsing for fftw is broken, so we ignore it
     # manually, for now
     - fftw
+    # we don't link against libpython
+    - python
   number: 3
   skip: true  # [win]
 
