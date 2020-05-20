@@ -27,6 +27,8 @@ source:
     - 0003-lalapps-fix-py3-issues-in-lalapps_cbc_sbank_sim.patch
     - 0004-lalapps-fix-python3-imports-in-string_final.patch
     - 0005-lalapps-fix-SyntaxError-in-lalapps_cbc_sbank_sim-for.patch
+    # libframel
+    - libframel.patch
 
 build:
   error_overdepending: true
@@ -37,7 +39,7 @@ build:
     - fftw
     # we don't link against libpython
     - python
-  number: 3
+  number: 4
   skip: true  # [win]
 
 requirements:
@@ -60,7 +62,7 @@ requirements:
     - lalmetaio >={{ lalmetaio_version }}
     - lalpulsar >={{ lalpulsar_version }}
     - lalsimulation >={{ lalsimulation_version }}
-    - libframe
+    - libframel
     - ligo-segments
     - numpy
     - pillow
@@ -87,7 +89,7 @@ requirements:
     - lalinspiral >={{ lalinspiral_version }}
     - lalpulsar >={{ lalpulsar_version }}
     - lalinference >={{ lalinference_version }}
-    - libframe
+    - libframel
     - ligo-segments
     - numpy
     - pillow
