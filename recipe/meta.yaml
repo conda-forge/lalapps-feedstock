@@ -29,6 +29,7 @@ source:
     - 0005-lalapps-fix-SyntaxError-in-lalapps_cbc_sbank_sim-for.patch
     # libframel
     - libframel.patch
+    - obsolete-framelib-check.patch
 
 build:
   error_overdepending: true
