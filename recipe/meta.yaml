@@ -1,6 +1,6 @@
 {% set name = "lalapps" %}
-{% set version = "6.25.1" %}
-{% set sha256 = "ef91dbe0c8926bd279b04ace327a61d5d88e14887b11664419edefa63e337224" %}
+{% set version = "6.26.0" %}
+{% set sha256 = "656e9f6386ecfa639fcba81f937c756838a95f3a33439445a61262084a7ab27b" %}
 
 {% set lal_version = "6.21.0" %}
 {% set lalburst_version = "1.5.3" %}
@@ -12,12 +12,12 @@
 {% set lalsimulation_version = "1.10.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "http://software.ligo.org/lscsoft/source/lalsuite/{{ name }}-{{ version }}.tar.xz"
-  sha256: "{{ sha256 }}"
+  url: http://software.ligo.org/lscsoft/source/lalsuite/{{ name }}-{{ version }}.tar.xz
+  sha256: {{ sha256 }}
   patches:
     # weave tests are fragile and hardware dependent
     - disable-weave-tests.patch
@@ -40,7 +40,7 @@ build:
     - fftw
     # we don't link against libpython
     - python
-  number: 4
+  number: 0
   skip: true  # [win]
 
 requirements:
@@ -178,7 +178,8 @@ test:
     - lalapps_gwf2xml --help
     - lalapps_heterodyne_pulsar --help
     - lalapps_inspfrinj --help
-    - lalapps_inspinj --f-lower 30 --waveform IMRPhenomD --gps-start-time 1000000000 --gps-end-time 1000000010 --d-distr volume --l-distr random --m-distr log --i-distr gaussian --incl-std 2 --min-distance 100000 --max-distance 120000 --min-mass1 10 --max-mass1 20 --min-mass2 10 --max-mass2 20 --disable-spin --time-step 2
+    - lalapps_inspinj --f-lower 30 --waveform IMRPhenomD --gps-start-time 1000000000 --gps-end-time 1000000010 --d-distr volume --l-distr random --m-distr log --i-distr gaussian --incl-std 2 --min-distance 100000 --max-distance 120000 --min-mass1 10 --max-mass1 20 --min-mass2 10 --max-mass2 20 --disable-spin --time-step
+      2
     - lalapps_inspinjfind --help
     - lalapps_knope --help
     - lalapps_knope_collate_results --help
@@ -225,13 +226,13 @@ test:
     - lalapps_version
 
 about:
-  home: "https://wiki.ligo.org/Computing/LALSuite"
-  dev_url: "https://git.ligo.org/lscsoft/lalsuite/"
-  doc_url: "https://docs.ligo.org/lscsoft/lalsuite/lalapps/"
-  license: "GPL-2.0-or-later"
-  license_family: "GPL"
-  license_file: "COPYING"
-  summary: "LSC Algorithm Library Applications"
+  home: https://wiki.ligo.org/Computing/LALSuite
+  dev_url: https://git.ligo.org/lscsoft/lalsuite/
+  doc_url: https://docs.ligo.org/lscsoft/lalsuite/lalapps/
+  license: GPL-2.0-or-later
+  license_family: GPL
+  license_file: COPYING
+  summary: LSC Algorithm Library Applications
   description: |
     The LSC Algorithm Library Applications for gravitational wave data
     analysis.  This package contains applications that are built on tools
