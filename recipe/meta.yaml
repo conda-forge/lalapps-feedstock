@@ -1,35 +1,27 @@
 {% set name = "lalapps" %}
-{% set version = "6.25.1" %}
-{% set sha256 = "ef91dbe0c8926bd279b04ace327a61d5d88e14887b11664419edefa63e337224" %}
+{% set version = "6.26.0" %}
+{% set sha256 = "656e9f6386ecfa639fcba81f937c756838a95f3a33439445a61262084a7ab27b" %}
 
-{% set lal_version = "6.21.0" %}
+{% set framel_version = "8.39.1" %}
+{% set lal_version = "7.0.0" %}
 {% set lalburst_version = "1.5.3" %}
 {% set lalframe_version = "1.5.0" %}
-{% set lalinference_version = "1.11.4" %}
+{% set lalinference_version = "2.0.0" %}
 {% set lalinspiral_version = "1.10.0" %}
 {% set lalmetaio_version = "1.6.0" %}
-{% set lalpulsar_version = "1.18.2" %}
-{% set lalsimulation_version = "1.10.0" %}
+{% set lalpulsar_version = "2.0.0" %}
+{% set lalsimulation_version = "2.1.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "http://software.ligo.org/lscsoft/source/lalsuite/{{ name }}-{{ version }}.tar.xz"
-  sha256: "{{ sha256 }}"
+  url: http://software.ligo.org/lscsoft/source/lalsuite/{{ name }}-{{ version }}.tar.xz
+  sha256: {{ sha256 }}
   patches:
-    # weave tests are fragile and hardware dependent
-    - disable-weave-tests.patch
-    # python3 compatibility fixes
     - 0001-lalapps-fix-py3-issues-in-lalapps_cbc_sbank.patch
-    - 0002-lalapps-fix-py3-issues-in-lalapps_cbc_sbank_pipe.patch
     - 0003-lalapps-fix-py3-issues-in-lalapps_cbc_sbank_sim.patch
-    - 0004-lalapps-fix-python3-imports-in-string_final.patch
-    - 0005-lalapps-fix-SyntaxError-in-lalapps_cbc_sbank_sim-for.patch
-    # libframel
-    - libframel.patch
-    - obsolete-framelib-check.patch
 
 build:
   error_overdepending: true
@@ -40,7 +32,7 @@ build:
     - fftw
     # we don't link against libpython
     - python
-  number: 4
+  number: 0
   skip: true  # [win]
 
 requirements:
@@ -63,7 +55,7 @@ requirements:
     - lalmetaio >={{ lalmetaio_version }}
     - lalpulsar >={{ lalpulsar_version }}
     - lalsimulation >={{ lalsimulation_version }}
-    - libframel
+    - libframel >={{ framel_version }}
     - ligo-segments
     - numpy
     - pillow
@@ -90,7 +82,7 @@ requirements:
     - lalinspiral >={{ lalinspiral_version }}
     - lalpulsar >={{ lalpulsar_version }}
     - lalinference >={{ lalinference_version }}
-    - libframel
+    - libframel >={{ framel_version }}
     - ligo-segments
     - numpy
     - pillow
@@ -154,20 +146,10 @@ test:
     - lalapps_exc_resp -h
     - lalapps_fftw_wisdom --help
     - lalapps_fftwf_wisdom --help
-    - lalapps_fits_array_copy --help
-    - lalapps_fits_array_imarith --help
-    - lalapps_fits_array_list --help
-    - lalapps_fits_array_stat --help
-    - lalapps_fits_copy --help
-    - lalapps_fits_header_delval --help
     - lalapps_fits_header_getval --help
     - lalapps_fits_header_list --help
-    - lalapps_fits_header_setval --help
     - lalapps_fits_overview --help
-    - lalapps_fits_table_calc --help
     - lalapps_fits_table_list --help
-    - lalapps_fits_table_merge --help
-    - lalapps_fits_table_select --help
     - lalapps_fr_ninja --help
     - lalapps_frextr test.gwf Z-ilwd_test_frame-600000000-1.gwf Z0:RAMPED_INT_2U_1
     - lalapps_frinfo Z-ilwd_test_frame-600000000-1.gwf
@@ -178,7 +160,8 @@ test:
     - lalapps_gwf2xml --help
     - lalapps_heterodyne_pulsar --help
     - lalapps_inspfrinj --help
-    - lalapps_inspinj --f-lower 30 --waveform IMRPhenomD --gps-start-time 1000000000 --gps-end-time 1000000010 --d-distr volume --l-distr random --m-distr log --i-distr gaussian --incl-std 2 --min-distance 100000 --max-distance 120000 --min-mass1 10 --max-mass1 20 --min-mass2 10 --max-mass2 20 --disable-spin --time-step 2
+    - lalapps_inspinj --f-lower 30 --waveform IMRPhenomD --gps-start-time 1000000000 --gps-end-time 1000000010 --d-distr volume --l-distr random --m-distr log --i-distr gaussian --incl-std 2 --min-distance 100000 --max-distance 120000 --min-mass1 10 --max-mass1 20 --min-mass2 10 --max-mass2 20 --disable-spin --time-step
+      2
     - lalapps_inspinjfind --help
     - lalapps_knope --help
     - lalapps_knope_collate_results --help
@@ -199,7 +182,6 @@ test:
     - lalapps_power_veto --help
     - lalapps_psinject -h
     - lalapps_pulsar_frequency_evolution --help
-    - lalapps_pulsar_parameter_estimation --help
     - lalapps_pulsar_parameter_estimation_nested --help
     - lalapps_random_bank 10 20 10
     - lalapps_randombank --minimum-mass 10 --maximum-mass 20 --number-of-templates 10
@@ -225,13 +207,13 @@ test:
     - lalapps_version
 
 about:
-  home: "https://wiki.ligo.org/Computing/LALSuite"
-  dev_url: "https://git.ligo.org/lscsoft/lalsuite/"
-  doc_url: "https://docs.ligo.org/lscsoft/lalsuite/lalapps/"
-  license: "GPL-2.0-or-later"
-  license_family: "GPL"
-  license_file: "COPYING"
-  summary: "LSC Algorithm Library Applications"
+  home: https://wiki.ligo.org/Computing/LALSuite
+  dev_url: https://git.ligo.org/lscsoft/lalsuite/
+  doc_url: https://docs.ligo.org/lscsoft/lalsuite/lalapps/
+  license: GPL-2.0-or-later
+  license_family: GPL
+  license_file: COPYING
+  summary: LSC Algorithm Library Applications
   description: |
     The LSC Algorithm Library Applications for gravitational wave data
     analysis.  This package contains applications that are built on tools
