@@ -1,6 +1,6 @@
 {% set name = "lalapps" %}
-{% set version = "6.26.1" %}
-{% set sha256 = "fffa819168e2bb4ad56477281b3ebfc7eeabd950534775b806562a536d134df8" %}
+{% set version = "7.0.0" %}
+{% set sha256 = "3fc5a9c3615cf56ada1bffbb9f56daaa873a89e662ed5eeb77bb40b10ad081db" %}
 
 {% set framel_version = "8.39.1" %}
 {% set lal_version = "7.0.0" %}
