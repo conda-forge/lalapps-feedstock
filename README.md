@@ -5,9 +5,13 @@ Home: https://wiki.ligo.org/Computing/LALSuite
 
 Package license: GPL-2.0-or-later
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/lalapps-feedstock/blob/master/LICENSE.txt)
 
 Summary: LSC Algorithm Library Applications
+
+Development: https://git.ligo.org/lscsoft/lalsuite/
+
+Documentation: https://docs.ligo.org/lscsoft/lalsuite/lalapps/
 
 The LSC Algorithm Library Applications for gravitational wave data
 analysis.  This package contains applications that are built on tools

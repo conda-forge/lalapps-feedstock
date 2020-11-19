@@ -1,16 +1,16 @@
 {% set name = "lalapps" %}
-{% set version = "6.26.1" %}
-{% set sha256 = "fffa819168e2bb4ad56477281b3ebfc7eeabd950534775b806562a536d134df8" %}
+{% set version = "7.0.0" %}
+{% set sha256 = "3fc5a9c3615cf56ada1bffbb9f56daaa873a89e662ed5eeb77bb40b10ad081db" %}
 
-{% set framel_version = "8.39.1" %}
-{% set lal_version = "7.0.0" %}
+{% set framel_version = "8.39.2" %}
+{% set lal_version = "7.1.0" %}
 {% set lalburst_version = "1.5.3" %}
 {% set lalframe_version = "1.5.0" %}
 {% set lalinference_version = "2.0.0" %}
-{% set lalinspiral_version = "1.10.0" %}
-{% set lalmetaio_version = "1.6.0" %}
-{% set lalpulsar_version = "2.0.0" %}
-{% set lalsimulation_version = "2.1.0" %}
+{% set lalinspiral_version = "2.0.0" %}
+{% set lalmetaio_version = "2.0.0" %}
+{% set lalpulsar_version = "2.1.0" %}
+{% set lalsimulation_version = "2.3.0" %}
 
 package:
   name: {{ name|lower }}
@@ -22,6 +22,7 @@ source:
   patches:
     - 0001-lalapps-fix-py3-issues-in-lalapps_cbc_sbank.patch
     - 0003-lalapps-fix-py3-issues-in-lalapps_cbc_sbank_sim.patch
+    - 0004-lalapps-fix-388.patch
 
 build:
   error_overdepending: true
@@ -95,7 +96,7 @@ requirements:
     - python-lalmetaio >={{ lalmetaio_version }}
     - python-lalpulsar >={{ lalpulsar_version }}
     - python-lalsimulation >={{ lalsimulation_version }}
-    - python-ligo-lw <1.6.0
+    - python-ligo-lw
 
 test:
   imports:
@@ -105,7 +106,6 @@ test:
     - lalapps.inspiral
     - lalapps.inspiralutils
     - lalapps.knope_utils
-    - lalapps.power
     - lalapps.pulsarhtmlutils
     - lalapps.pulsarpputils
   requires:
@@ -176,10 +176,6 @@ test:
     - lalapps_power_pipe --help
     - lalapps_power_plot_binj --help
     - lalapps_power_plot_binjtf --help
-    - lalapps_power_plot_burca --help
-    - lalapps_power_plot_burca2 --help
-    - lalapps_power_plot_burst --help
-    - lalapps_power_veto --help
     - lalapps_psinject -h
     - lalapps_pulsar_frequency_evolution --help
     - lalapps_pulsar_parameter_estimation_nested --help
