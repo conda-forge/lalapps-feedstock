@@ -1,0 +1,31 @@
+From 133f3e4026fda1444dc38815c3fc72000cd30ed4 Mon Sep 17 00:00:00 2001
+From: Karl Wette <karl.wette@ligo.org>
+Date: Thu, 19 Nov 2020 13:07:17 +1100
+Subject: [PATCH] Fix issue lscsoft/lalsuite#388
+
+- Newer Gawk (at least v5.1.0) will pre-compile the ratio
+    ${peak_mem_sim_full} / ${peak_mem_no_sim}
+  as a constant expression; if ${peak_mem_no_sim} == 0 this will then raise an
+    awk: cmd. line:1: error: division by zero attempted
+  error, even though the expression is never used as the if() condition is false
+- Assigning those values to Gawk variables prevents the pre-compilation
+---
+ lalapps/src/pulsar/Weave/testWeave_simulate_search.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lalapps/src/pulsar/Weave/testWeave_simulate_search.sh b/lalapps/src/pulsar/Weave/testWeave_simulate_search.sh
+index b412f9aaa0..43b20abb94 100644
+--- a/lalapps/src/pulsar/Weave/testWeave_simulate_search.sh
++++ b/lalapps/src/pulsar/Weave/testWeave_simulate_search.sh
+@@ -117,7 +117,7 @@ for setup in short mid long; do
+     set -x
+     peak_mem_no_sim=`lalapps_fits_header_getval "WeaveOutNoSim.fits[0]" 'PEAKMEM' | tr '\n\r' '  ' | awk 'NF == 1 {printf "%.16g", $1}'`
+     peak_mem_sim_full=`lalapps_fits_header_getval "WeaveOutSimFull.fits[0]" 'PEAKMEM' | tr '\n\r' '  ' | awk 'NF == 1 {printf "%.16g", $1}'`
+-    awk "BEGIN { if ( ${peak_mem_sim_full} > 0 && ${peak_mem_no_sim} > 0 ) { print x = ${peak_mem_sim_full} / ${peak_mem_no_sim}; exit ( ( 0.9 < x && x < 1.0 ) ? 0 : 1 ) }; exit 0 }"
++    awk "BEGIN { x = ${peak_mem_sim_full}; y = ${peak_mem_no_sim}; if ( x > 0 && y > 0 ) { print r = x / y; exit ( ( 0.9 < r && r < 1.0 ) ? 0 : 1 ) }; exit 0 }"
+     set +x
+     echo
+ 
+-- 
+GitLab
+
