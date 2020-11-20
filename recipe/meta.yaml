@@ -33,7 +33,7 @@ build:
     - fftw
     # we don't link against libpython
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
@@ -69,7 +69,7 @@ requirements:
     - python-lalmetaio >={{ lalmetaio_version }}
     - python-lalpulsar >={{ lalpulsar_version }}
     - python-lalsimulation >={{ lalsimulation_version }}
-    - python-ligo-lw <1.6.0
+    - python-ligo-lw
   run:
     - cfitsio
     - fftw
