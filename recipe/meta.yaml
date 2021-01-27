@@ -1,6 +1,6 @@
 {% set name = "lalapps" %}
-{% set version = "7.0.0" %}
-{% set sha256 = "3fc5a9c3615cf56ada1bffbb9f56daaa873a89e662ed5eeb77bb40b10ad081db" %}
+{% set version = "7.1.0" %}
+{% set sha256 = "d27e4a3136c5f85245f0fa9feb0f21e2f6bef0158a3b2ffdd0c1b03941893c27" %}
 
 {% set framel_version = "8.39.2" %}
 {% set lal_version = "7.1.0" %}
@@ -33,7 +33,7 @@ build:
     - fftw
     # we don't link against libpython
     - python
-  number: 1
+  number: 0
   skip: true  # [win]
 
 requirements:
