@@ -22,7 +22,6 @@ source:
   patches:
     - 0001-lalapps-fix-py3-issues-in-lalapps_cbc_sbank.patch
     - 0003-lalapps-fix-py3-issues-in-lalapps_cbc_sbank_sim.patch
-    - 0004-lalapps-fix-388.patch
 
 build:
   error_overdepending: true
