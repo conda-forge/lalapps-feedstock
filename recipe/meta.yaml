@@ -182,7 +182,7 @@ test:
     - lalapps_searchsum2cache --help
     - lalapps_splitSFTs --help
     - lalapps_splitbank --verbose --bank-file P1-TMPLTBANK-0-0.xml --number-of-banks 2 --minimal-match 0.9
-    - test "$(LALPULSAR_PREFIX=${PREFIX} lalapps_ssbtodetector --gps 1000000000 --ra 0 --dec 0 --telescope JBO)" == "999999506.306100250"
+    - test "$(lalapps_ssbtodetector --gps 1000000000 --ra 0 --dec 0 --telescope JBO)" == "999999506.306100250"
     - lalapps_string_apply_vetoes --help
     - lalapps_string_calc_likelihood --help
     - lalapps_string_contour_plotter --help
