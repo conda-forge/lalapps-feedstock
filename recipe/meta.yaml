@@ -1,6 +1,6 @@
 {% set name = "lalapps" %}
-{% set version = "7.1.0" %}
-{% set sha256 = "d27e4a3136c5f85245f0fa9feb0f21e2f6bef0158a3b2ffdd0c1b03941893c27" %}
+{% set version = "7.2.0" %}
+{% set sha256 = "6b241318c17cf9eac746078b33c0c664e3c94174c328c4c8184363ddff0b4e5d" %}
 
 {% set framel_version = "8.39.2" %}
 {% set lal_version = "7.1.0" %}
@@ -19,9 +19,6 @@ package:
 source:
   url: http://software.ligo.org/lscsoft/source/lalsuite/{{ name }}-{{ version }}.tar.xz
   sha256: {{ sha256 }}
-  patches:
-    - 0001-lalapps-fix-py3-issues-in-lalapps_cbc_sbank.patch
-    - 0003-lalapps-fix-py3-issues-in-lalapps_cbc_sbank_sim.patch
 
 build:
   error_overdepending: true
