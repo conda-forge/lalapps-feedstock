@@ -19,9 +19,6 @@ package:
 source:
   url: http://software.ligo.org/lscsoft/source/lalsuite/{{ name }}-{{ version }}.tar.xz
   sha256: {{ sha256 }}
-  patches:
-    - 0001-lalapps-fix-py3-issues-in-lalapps_cbc_sbank.patch
-    - 0003-lalapps-fix-py3-issues-in-lalapps_cbc_sbank_sim.patch
 
 build:
   error_overdepending: true
