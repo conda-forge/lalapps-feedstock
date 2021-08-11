@@ -17,7 +17,7 @@ fftw:
 gsl:
 - '2.6'
 numpy:
-- '1.16'
+- '1.18'
 pin_run_as_build:
   fftw:
     max_pin: x
