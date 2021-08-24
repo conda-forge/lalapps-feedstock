@@ -29,7 +29,7 @@ build:
     - fftw
     # we don't link against libpython
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
