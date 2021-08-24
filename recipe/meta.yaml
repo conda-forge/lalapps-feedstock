@@ -98,7 +98,6 @@ test:
     - lalapps
     - lalapps.cosmicstring
     - lalapps.inspiral
-    - lalapps.inspiralutils
     - lalapps.knope_utils
     - lalapps.pulsarhtmlutils
     - lalapps.pulsarpputils
