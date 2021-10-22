@@ -1,7 +1,7 @@
 {% set name = "lalapps" %}
 {% set version = "7.3.0" %}
-{% set sha256 = "7053b55404b2e18fa190da17268fd797806043d4c31a16ee15279002d47adcdd" %}
 
+# dependency versions
 {% set framel_version = "8.39.2" %}
 {% set lal_version = "7.1.0" %}
 {% set lalburst_version = "1.5.3" %}
@@ -18,32 +18,35 @@ package:
 
 source:
   url: http://software.ligo.org/lscsoft/source/lalsuite/{{ name }}-{{ version }}.tar.xz
-  sha256: {{ sha256 }}
+  sha256: 7053b55404b2e18fa190da17268fd797806043d4c31a16ee15279002d47adcdd
+  patches:
+    # remove gsl_version check, the cross-compiling support is broken
+    # (this is fixed upstream so can be removed on next release)
+    - no-gsl_version-check.patch  # [build_platform != target_platform]
 
 build:
   error_overdepending: true
   error_overlinking: true
   ignore_run_exports:
-    # run_exports parsing for fftw is broken, so we ignore it
-    # manually, for now
-    - fftw
     # we don't link against libpython
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
   build:
     - bc
     - {{ compiler('c') }}
-    - help2man
+    - help2man >=1.37  # [build_platform == target_platform]
     - make
     - pkg-config
+    # extras for cross-compiling
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - python                              # [build_platform != target_platform]
   host:
     - cfitsio
     - fftw * nompi*
     - gsl
-    - h5py
     - liblal >={{ lal_version }}
     - liblalburst >={{ lalburst_version }}
     - liblalframe >={{ lalframe_version }}
@@ -53,19 +56,21 @@ requirements:
     - liblalpulsar >={{ lalpulsar_version }}
     - liblalsimulation >={{ lalsimulation_version }}
     - libframel >={{ framel_version }}
-    - ligo-segments
-    - numpy
-    - pillow
     - python
-    - python-lal >={{ lal_version }}
-    - python-lalburst >={{ lalburst_version }}
-    - python-lalinference >={{ lalinference_version }}
-    - python-lalinspiral >={{ lalinspiral_version }}
-    - python-lalframe >={{ lalframe_version }}
-    - python-lalmetaio >={{ lalmetaio_version }}
-    - python-lalpulsar >={{ lalpulsar_version }}
-    - python-lalsimulation >={{ lalsimulation_version }}
-    - python-ligo-lw
+    # extras needed for help2man (not when cross compiling)
+    - h5py  # [build_platform == target_platform]
+    - ligo-segments  # [build_platform == target_platform]
+    - numpy  # [build_platform == target_platform]
+    - pillow  # [build_platform == target_platform]
+    - python-lal >={{ lal_version }}  # [build_platform == target_platform]
+    - python-lalburst >={{ lalburst_version }}  # [build_platform == target_platform]
+    - python-lalinference >={{ lalinference_version }}  # [build_platform == target_platform]
+    - python-lalinspiral >={{ lalinspiral_version }}  # [build_platform == target_platform]
+    - python-lalframe >={{ lalframe_version }}  # [build_platform == target_platform]
+    - python-lalmetaio >={{ lalmetaio_version }}  # [build_platform == target_platform]
+    - python-lalpulsar >={{ lalpulsar_version }}  # [build_platform == target_platform]
+    - python-lalsimulation >={{ lalsimulation_version }}  # [build_platform == target_platform]
+    - python-ligo-lw  # [build_platform == target_platform]
   run:
     - cfitsio
     - fftw
