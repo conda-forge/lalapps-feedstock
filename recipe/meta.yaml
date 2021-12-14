@@ -5,12 +5,12 @@
 {% set framel_version = "8.39.2" %}
 {% set lal_version = "7.1.0" %}
 {% set lalburst_version = "1.5.3" %}
-{% set lalframe_version = "1.5.0" %}
+{% set lalframe_version = "1.6.0" %}
 {% set lalinference_version = "3.0.0" %}
 {% set lalinspiral_version = "2.0.0" %}
-{% set lalmetaio_version = "2.0.0" %}
+{% set lalmetaio_version = "2.1.0" %}
 {% set lalpulsar_version = "3.1.0" %}
-{% set lalsimulation_version = "3.0.0" %}
+{% set lalsimulation_version = "3.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -70,7 +70,7 @@ requirements:
     - python-lalmetaio >={{ lalmetaio_version }}  # [build_platform == target_platform]
     - python-lalpulsar >={{ lalpulsar_version }}  # [build_platform == target_platform]
     - python-lalsimulation >={{ lalsimulation_version }}  # [build_platform == target_platform]
-    - python-ligo-lw  # [build_platform == target_platform]
+    - python-ligo-lw >=1.7.0  # [build_platform == target_platform]
   run:
     - cfitsio
     - fftw
@@ -96,7 +96,7 @@ requirements:
     - python-lalmetaio >={{ lalmetaio_version }}
     - python-lalpulsar >={{ lalpulsar_version }}
     - python-lalsimulation >={{ lalsimulation_version }}
-    - python-ligo-lw
+    - python-ligo-lw >=1.7.0
 
 test:
   imports:
