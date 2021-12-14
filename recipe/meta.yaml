@@ -1,5 +1,5 @@
 {% set name = "lalapps" %}
-{% set version = "7.3.0" %}
+{% set version = "7.4.0" %}
 
 # dependency versions
 {% set framel_version = "8.39.2" %}
@@ -18,7 +18,7 @@ package:
 
 source:
   url: http://software.ligo.org/lscsoft/source/lalsuite/{{ name }}-{{ version }}.tar.xz
-  sha256: 7053b55404b2e18fa190da17268fd797806043d4c31a16ee15279002d47adcdd
+  sha256: c97e3b1cf6f176bd2099201cf6b723ffd2aef3f8c1f20713bfd0bab550a9318c
   patches:
     # remove gsl_version check, the cross-compiling support is broken
     # (this is fixed upstream so can be removed on next release)
@@ -30,7 +30,7 @@ build:
   ignore_run_exports:
     # we don't link against libpython
     - python
-  number: 1
+  number: 0
   skip: true  # [win]
 
 requirements:
