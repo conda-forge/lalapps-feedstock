@@ -1,5 +1,5 @@
 {% set name = "lalapps" %}
-{% set version = "8.1.0" %}
+{% set version = "8.1.1" %}
 
 # dependency versions
 {% set framel_version = "8.39.2" %}
@@ -18,15 +18,15 @@ package:
 
 source:
   url: http://software.ligo.org/lscsoft/source/lalsuite/{{ name }}-{{ version }}.tar.xz
-  sha256: 75b9201b3c7d0a750c9f8daca3769cc5842231ee4dadbcea92beda8d133d0975
+  sha256: 59cda09ae7fadc79d2e2d76538e4528dc4395e02d2d73b5c4c6a9a9335d3352a
 
 build:
   error_overdepending: true
   error_overlinking: true
   ignore_run_exports:
-    # we don't link against libpython
+    - numpy
     - python
-  number: 1
+  number: 0
   skip: true  # [win]
 
 requirements:
