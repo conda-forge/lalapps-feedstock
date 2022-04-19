@@ -24,7 +24,7 @@ build:
   error_overdepending: true
   error_overlinking: true
   ignore_run_exports:
-    # we don't link against libpython
+    - numpy
     - python
   number: 0
   skip: true  # [win]
