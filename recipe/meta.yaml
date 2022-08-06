@@ -1,5 +1,5 @@
 {% set name = "lalapps" %}
-{% set version = "8.1.1" %}
+{% set version = "9.0.0" %}
 
 # dependency versions
 {% set framel_version = "8.39.2" %}
@@ -18,7 +18,7 @@ package:
 
 source:
   url: http://software.ligo.org/lscsoft/source/lalsuite/{{ name }}-{{ version }}.tar.xz
-  sha256: 59cda09ae7fadc79d2e2d76538e4528dc4395e02d2d73b5c4c6a9a9335d3352a
+  sha256: 0897b47672d0018fa3d801573c612b4584c75e37d4632ec9de22010493e73b9e
 
 build:
   error_overdepending: true
