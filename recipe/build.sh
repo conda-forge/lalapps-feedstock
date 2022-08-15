@@ -1,5 +1,7 @@
 #!/bin/bash
 
+_make="make -j ${CPU_COUNT} V=1 VERBOSE=1"
+
 # use out-of-tree build
 mkdir -p _build
 pushd _build
@@ -22,12 +24,12 @@ ${SRC_DIR}/configure \
 ;
 
 # build
-make -j ${CPU_COUNT} V=1 VERBOSE=1
+${_make}
 
 # check (only when not cross compiling)
-if [[ $build_platform == $target_platform ]]; then
-	make -j ${CPU_COUNT} V=1 VERBOSE=1 check
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
+	${_make} check
 fi
 
 # install
-make -j ${CPU_COUNT} V=1 VERBOSE=1 install
+${_make} install
