@@ -3,21 +3,20 @@
 
 # dependency versions
 {% set framel_version = "8.39.2" %}
-{% set lal_version = "7.1.0" %}
-{% set lalburst_version = "1.5.3" %}
+{% set lal_version = "7.2.0" %}
 {% set lalframe_version = "2.0.0" %}
-{% set lalinference_version = "3.0.0" %}
-{% set lalinspiral_version = "2.0.0" %}
-{% set lalmetaio_version = "2.1.0" %}
-{% set lalpulsar_version = "4.0.0" %}
-{% set lalsimulation_version = "3.1.0" %}
+{% set lalmetaio_version = "3.0.0" %}
+{% set lalsimulation_version = "4.0.0" %}
+{% set lalburst_version = "1.6.0" %}
+{% set lalinspiral_version = "3.0.0" %}
+{% set lalinference_version = "4.0.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: http://software.ligo.org/lscsoft/source/lalsuite/{{ name }}-{{ version }}.tar.xz
+  url: https://software.igwn.org/sources/source/lalsuite/{{ name }}-{{ version }}.tar.xz
   sha256: 0897b47672d0018fa3d801573c612b4584c75e37d4632ec9de22010493e73b9e
 
 build:
@@ -34,14 +33,13 @@ requirements:
     - bc
     - {{ compiler('c') }}
     - help2man >=1.37  # [build_platform == target_platform]
-    - make
+    - make  # [unix]
     - pkg-config
     # extras for cross-compiling
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - python                              # [build_platform != target_platform]
   host:
     - cfitsio
-    - fftw * nompi*
     - gsl
     - liblal >={{ lal_version }}
     - liblalburst >={{ lalburst_version }}
@@ -49,7 +47,6 @@ requirements:
     - liblalinference >={{ lalinference_version }}
     - liblalinspiral >={{ lalinspiral_version }}
     - liblalmetaio >={{ lalmetaio_version }}
-    - liblalpulsar >={{ lalpulsar_version }}
     - liblalsimulation >={{ lalsimulation_version }}
     - libframel >={{ framel_version }}
     - python
@@ -64,33 +61,30 @@ requirements:
     - python-lalinspiral >={{ lalinspiral_version }}  # [build_platform == target_platform]
     - python-lalframe >={{ lalframe_version }}  # [build_platform == target_platform]
     - python-lalmetaio >={{ lalmetaio_version }}  # [build_platform == target_platform]
-    - python-lalpulsar >={{ lalpulsar_version }}  # [build_platform == target_platform]
     - python-lalsimulation >={{ lalsimulation_version }}  # [build_platform == target_platform]
     - python-ligo-lw >=1.7.0  # [build_platform == target_platform]
   run:
     - cfitsio
-    - fftw
     - gsl
     - h5py
-    - lalinference >={{ lalinference_version }}
     - libframel >={{ framel_version }}
     - liblal >={{ lal_version }}
     - liblalframe >={{ lalframe_version }}
+    - liblalinference >={{ lalinference_version }}
     - liblalmetaio >={{ lalmetaio_version }}
     - liblalsimulation >={{ lalsimulation_version }}
     - liblalburst >={{ lalburst_version }}
     - liblalinspiral >={{ lalinspiral_version }}
-    - liblalpulsar >={{ lalpulsar_version }}
     - ligo-segments
     - numpy
     - pillow
     - python
     - python-lal >={{ lal_version }}
     - python-lalburst >={{ lalburst_version }}
+    - python-lalframe >={{ lalframe_version }}
     - python-lalinference >={{ lalinference_version }}
     - python-lalinspiral >={{ lalinspiral_version }}
     - python-lalmetaio >={{ lalmetaio_version }}
-    - python-lalpulsar >={{ lalpulsar_version }}
     - python-lalsimulation >={{ lalsimulation_version }}
     - python-ligo-lw >=1.7.0
 
@@ -99,9 +93,6 @@ test:
     - lalapps
     - lalapps.cosmicstring
     - lalapps.inspiral
-    - lalapps.knope_utils
-    - lalapps.pulsarhtmlutils
-    - lalapps.pulsarpputils
   requires:
     - ldas-tools-framecpp
   commands:
@@ -109,14 +100,7 @@ test:
     - framecpp_sample
     # run --help
     - lalapps_binj --help
-    - lalapps_binj_pic --help
-    - lalapps_binjfind --help
     - lalapps_blindinj --help
-    - lalapps_bucluster --help
-    - lalapps_bucut --help
-    - lalapps_burca --help
-    - lalapps_burca_tailor --help
-    - lalapps_cache Z-ilwd_test_frame-600000000-1.gwf
     - lalapps_cafe --help
     - lalapps_calcexpsnr --help
     - lalapps_cbc_stochasticbank --help
@@ -124,18 +108,8 @@ test:
     - lalapps_coh_PTF_inspiral --help
     - lalapps_coinj --help
     - lalapps_cosmicstring_pipe --help
-    - lalapps_create_pulsar_signal_frame --help
-    - lalapps_create_solar_system_ephemeris --help
-    - lalapps_create_solar_system_ephemeris_python --help
-    - TEMPO2="" lalapps_create_time_correction_ephemeris --help
     - lalapps_effdist --help
     - lalapps_exc_resp -h
-    - lalapps_fftw_wisdom --help
-    - lalapps_fftwf_wisdom --help
-    - lalapps_fits_header_getval --help
-    - lalapps_fits_header_list --help
-    - lalapps_fits_overview --help
-    - lalapps_fits_table_list --help
     - lalapps_fr_ninja --help
     - lalapps_frextr test.gwf Z-ilwd_test_frame-600000000-1.gwf Z0:RAMPED_INT_2U_1
     - lalapps_frinfo Z-ilwd_test_frame-600000000-1.gwf
@@ -144,34 +118,17 @@ test:
     - lalapps_frview --help
     - lalapps_gen_timeslides --help
     - lalapps_gwf2xml --help
-    - lalapps_heterodyne_pulsar --help
     - lalapps_inspfrinj --help
     - lalapps_inspinj --f-lower 30 --waveform IMRPhenomD --gps-start-time 1000000000 --gps-end-time 1000000010 --d-distr volume --l-distr random --m-distr log --i-distr gaussian --incl-std 2 --min-distance 100000 --max-distance 120000 --min-mass1 10 --max-mass1 20 --min-mass2 10 --max-mass2 20 --disable-spin --time-step
       2
-    - lalapps_inspinjfind --help
-    - lalapps_knope --help
-    - lalapps_knope_collate_results --help
-    #- lalapps_knope_result_page --help  <- needs scotchcorner
     - lalapps_make_nr_hdf_catalog --help
-    - lalapps_path2cache <<< Z-ilwd_test_frame-600000000-1.gwf
-    - lalapps_plot_tisi --help
     - lalapps_power --help
-    - lalapps_power_calc_likelihood --help
-    - lalapps_power_final --help
     - lalapps_power_likelihood_pipe --help
     - lalapps_power_pipe --help
-    - lalapps_power_plot_binj --help
-    - lalapps_power_plot_binjtf --help
-    - lalapps_psinject -h
-    - lalapps_pulsar_frequency_evolution --help
-    - lalapps_pulsar_parameter_estimation_nested --help
     - lalapps_random_bank 10 20 10
     - lalapps_randombank --minimum-mass 10 --maximum-mass 20 --number-of-templates 10
     - lalapps_run_sqlite --help
-    - lalapps_searchsum2cache --help
-    - lalapps_splitSFTs --help
     - lalapps_splitbank --verbose --bank-file P1-TMPLTBANK-0-0.xml --number-of-banks 2 --minimal-match 0.9
-    - test "$(lalapps_ssbtodetector --gps 1000000000 --ra 0 --dec 0 --telescope JBO)" == "999999506.306100250"
     - lalapps_string_apply_vetoes --help
     - lalapps_string_calc_likelihood --help
     - lalapps_string_contour_plotter --help
@@ -182,9 +139,6 @@ test:
     - lalapps_string_meas_likelihood --help
     - lalapps_string_plot_binj --help
     - lalapps_string_plot_likelihood --help
-    - test "$(lalapps_tconvert --rfc-2822 800000000)" == "Fri, 13 May 2005 06:13:07 +0000"
-    - test "$(lalapps_tconvert Fri, 13 May 2005 06:13:07 +0000)" -eq 800000000
-    - lalapps_thinca --help
     - lalapps_tmpltbank --help
     - lalapps_version
 
