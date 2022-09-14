@@ -137,6 +137,8 @@ test:
     - lalapps_string_plot_likelihood --help
     - lalapps_tmpltbank --help
     - lalapps_version
+    # test lalapps_... stubs for lalpulsar_... executables
+    - ( set +e; lalapps_knope --help; test $? -ne 127 )
 
 about:
   home: https://wiki.ligo.org/Computing/LALSuite
