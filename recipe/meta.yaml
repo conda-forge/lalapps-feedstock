@@ -1,15 +1,16 @@
 {% set name = "lalapps" %}
-{% set version = "9.0.0" %}
+{% set version = "9.0.2" %}
 
 # dependency versions
 {% set framel_version = "8.39.2" %}
-{% set lal_version = "7.2.0" %}
+{% set lal_version = "7.2.2" %}
 {% set lalframe_version = "2.0.0" %}
 {% set lalmetaio_version = "3.0.0" %}
 {% set lalsimulation_version = "4.0.0" %}
 {% set lalburst_version = "1.6.0" %}
 {% set lalinspiral_version = "3.0.0" %}
-{% set lalinference_version = "4.0.0" %}
+{% set lalinference_version = "4.1.0" %}
+{% set lalpulsar_version = "5.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -17,7 +18,7 @@ package:
 
 source:
   url: https://software.igwn.org/sources/source/lalsuite/{{ name }}-{{ version }}.tar.xz
-  sha256: 0897b47672d0018fa3d801573c612b4584c75e37d4632ec9de22010493e73b9e
+  sha256: 78ed2ee49be8dfb6829803b506da17b1094261e1f55fd75486e35456c6c73fba
 
 build:
   error_overdepending: true
@@ -47,6 +48,7 @@ requirements:
     - liblalinference >={{ lalinference_version }}
     - liblalinspiral >={{ lalinspiral_version }}
     - liblalmetaio >={{ lalmetaio_version }}
+    - liblalpulsar >={{ lalpulsar_version }}
     - liblalsimulation >={{ lalsimulation_version }}
     - libframel >={{ framel_version }}
     - python
@@ -68,24 +70,18 @@ requirements:
     - gsl
     - h5py
     - libframel >={{ framel_version }}
-    - liblal >={{ lal_version }}
-    - liblalframe >={{ lalframe_version }}
-    - liblalinference >={{ lalinference_version }}
-    - liblalmetaio >={{ lalmetaio_version }}
-    - liblalsimulation >={{ lalsimulation_version }}
-    - liblalburst >={{ lalburst_version }}
-    - liblalinspiral >={{ lalinspiral_version }}
+    - lal >={{ lal_version }}
+    - lalburst >={{ lalburst_version }}
+    - lalframe >={{ lalframe_version }}
+    - lalinference >={{ lalinference_version }}
+    - lalinspiral >={{ lalinspiral_version }}
+    - lalmetaio >={{ lalmetaio_version }}
+    - lalpulsar >={{ lalpulsar_version }}
+    - lalsimulation >={{ lalsimulation_version }}
     - ligo-segments
     - numpy
     - pillow
     - python
-    - python-lal >={{ lal_version }}
-    - python-lalburst >={{ lalburst_version }}
-    - python-lalframe >={{ lalframe_version }}
-    - python-lalinference >={{ lalinference_version }}
-    - python-lalinspiral >={{ lalinspiral_version }}
-    - python-lalmetaio >={{ lalmetaio_version }}
-    - python-lalsimulation >={{ lalsimulation_version }}
     - python-ligo-lw >=1.7.0
 
 test:
@@ -141,6 +137,8 @@ test:
     - lalapps_string_plot_likelihood --help
     - lalapps_tmpltbank --help
     - lalapps_version
+    # test lalapps_... stubs for lalpulsar_... executables
+    - ( set +e; lalapps_knope --help; test $? -ne 127 )
 
 about:
   home: https://wiki.ligo.org/Computing/LALSuite
