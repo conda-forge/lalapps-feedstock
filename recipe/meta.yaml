@@ -1,5 +1,5 @@
 {% set name = "lalapps" %}
-{% set version = "9.0.2" %}
+{% set version = "9.1.0" %}
 
 # dependency versions
 {% set framel_version = "8.39.2" %}
@@ -7,10 +7,10 @@
 {% set lalframe_version = "2.0.0" %}
 {% set lalmetaio_version = "3.0.0" %}
 {% set lalsimulation_version = "4.0.0" %}
-{% set lalburst_version = "1.6.0" %}
+{% set lalburst_version = "1.7.0" %}
 {% set lalinspiral_version = "3.0.0" %}
 {% set lalinference_version = "4.1.0" %}
-{% set lalpulsar_version = "5.0.0" %}
+{% set lalpulsar_version = "5.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -18,7 +18,7 @@ package:
 
 source:
   url: https://software.igwn.org/sources/source/lalsuite/{{ name }}-{{ version }}.tar.xz
-  sha256: 78ed2ee49be8dfb6829803b506da17b1094261e1f55fd75486e35456c6c73fba
+  sha256: ff3cff158aa46e28e92c3137a30e0e6a318724af5df18147695fa326de51351f
 
 build:
   error_overdepending: true
@@ -112,7 +112,6 @@ test:
     - lalapps_frjoin --verbose --output test.gwf Z-ilwd_test_frame-600000000-1.gwf
     - lalapps_frread Z-ilwd_test_frame-600000000-1.gwf Z0:RAMPED_INT_2U_1
     - lalapps_frview --help
-    - lalapps_gen_timeslides --help
     - lalapps_gwf2xml --help
     - lalapps_inspfrinj --help
     - lalapps_inspinj --f-lower 30 --waveform IMRPhenomD --gps-start-time 1000000000 --gps-end-time 1000000010 --d-distr volume --l-distr random --m-distr log --i-distr gaussian --incl-std 2 --min-distance 100000 --max-distance 120000 --min-mass1 10 --max-mass1 20 --min-mass2 10 --max-mass2 20 --disable-spin --time-step
