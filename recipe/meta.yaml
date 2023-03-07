@@ -1,5 +1,5 @@
 {% set name = "lalapps" %}
-{% set version = "9.1.0" %}
+{% set version = "9.2.0" %}
 
 # dependency versions
 {% set framel_version = "8.39.2" %}
@@ -18,7 +18,7 @@ package:
 
 source:
   url: https://software.igwn.org/sources/source/lalsuite/{{ name }}-{{ version }}.tar.xz
-  sha256: ff3cff158aa46e28e92c3137a30e0e6a318724af5df18147695fa326de51351f
+  sha256: 6c67979255b696801be2c6f78e43d32f365d6a20cda1c249f0cc6c0726c0fccf
 
 build:
   error_overdepending: true
@@ -26,7 +26,7 @@ build:
   ignore_run_exports:
     - numpy
     - python
-  number: 3
+  number: 0
   skip: true  # [win]
 
 requirements:
