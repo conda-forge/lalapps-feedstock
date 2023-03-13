@@ -1,16 +1,17 @@
 {% set name = "lalapps" %}
-{% set version = "9.1.0" %}
+{% set version = "9.2.0" %}
 
 # dependency versions
 {% set framel_version = "8.39.2" %}
-{% set lal_version = "7.2.2" %}
-{% set lalframe_version = "2.0.0" %}
-{% set lalmetaio_version = "3.0.0" %}
-{% set lalsimulation_version = "4.0.0" %}
-{% set lalburst_version = "1.7.0" %}
-{% set lalinspiral_version = "3.0.0" %}
+{% set lal_version = "7.3.0" %}
+{% set lalframe_version = "3.0.0" %}
+{% set lalmetaio_version = "4.0.0" %}
+{% set lalsimulation_version = "5.0.0" %}
+{% set lalburst_version = "2.0.0" %}
+{% set lalinspiral_version = "4.0.0" %}
 {% set lalinference_version = "4.1.0" %}
-{% set lalpulsar_version = "5.2.0" %}
+{% set lalpulsar_version = "6.0.0" %}
+{% set metaio_version = "8.4.0" %}
 
 package:
   name: {{ name|lower }}
@@ -18,7 +19,7 @@ package:
 
 source:
   url: https://software.igwn.org/sources/source/lalsuite/{{ name }}-{{ version }}.tar.xz
-  sha256: ff3cff158aa46e28e92c3137a30e0e6a318724af5df18147695fa326de51351f
+  sha256: 6c67979255b696801be2c6f78e43d32f365d6a20cda1c249f0cc6c0726c0fccf
 
 build:
   error_overdepending: true
@@ -26,7 +27,7 @@ build:
   ignore_run_exports:
     - numpy
     - python
-  number: 3
+  number: 0
   skip: true  # [win]
 
 requirements:
@@ -42,6 +43,7 @@ requirements:
   host:
     - cfitsio
     - gsl
+    - libframel >={{ framel_version }}
     - liblal >={{ lal_version }}
     - liblalburst >={{ lalburst_version }}
     - liblalframe >={{ lalframe_version }}
@@ -50,7 +52,7 @@ requirements:
     - liblalmetaio >={{ lalmetaio_version }}
     - liblalpulsar >={{ lalpulsar_version }}
     - liblalsimulation >={{ lalsimulation_version }}
-    - libframel >={{ framel_version }}
+    - libmetaio >={{ metaio_version }}
     - python
     # extras needed for help2man (not when cross compiling)
     - h5py  # [build_platform == target_platform]
@@ -69,7 +71,6 @@ requirements:
     - cfitsio
     - gsl
     - h5py
-    - libframel >={{ framel_version }}
     - lal >={{ lal_version }}
     - lalburst >={{ lalburst_version }}
     - lalframe >={{ lalframe_version }}
@@ -78,6 +79,8 @@ requirements:
     - lalmetaio >={{ lalmetaio_version }}
     - lalpulsar >={{ lalpulsar_version }}
     - lalsimulation >={{ lalsimulation_version }}
+    - libframel >={{ framel_version }}
+    - libmetaio >={{ metaio_version }}
     - ligo-segments
     - numpy
     - pillow
@@ -122,7 +125,6 @@ test:
     - lalapps_power_pipe --help
     - lalapps_random_bank 10 20 10
     - lalapps_randombank --minimum-mass 10 --maximum-mass 20 --number-of-templates 10
-    - lalapps_run_sqlite --help
     - lalapps_splitbank --verbose --bank-file P1-TMPLTBANK-0-0.xml --number-of-banks 2 --minimal-match 0.9
     - lalapps_string_apply_vetoes --help
     - lalapps_string_calc_likelihood --help
