@@ -11,6 +11,7 @@
 {% set lalinspiral_version = "4.0.0" %}
 {% set lalinference_version = "4.1.0" %}
 {% set lalpulsar_version = "6.0.0" %}
+{% set metaio_version = "8.4.0" %}
 
 package:
   name: {{ name|lower }}
@@ -42,6 +43,7 @@ requirements:
   host:
     - cfitsio
     - gsl
+    - libframel >={{ framel_version }}
     - liblal >={{ lal_version }}
     - liblalburst >={{ lalburst_version }}
     - liblalframe >={{ lalframe_version }}
@@ -50,7 +52,7 @@ requirements:
     - liblalmetaio >={{ lalmetaio_version }}
     - liblalpulsar >={{ lalpulsar_version }}
     - liblalsimulation >={{ lalsimulation_version }}
-    - libframel >={{ framel_version }}
+    - libmetaio >={{ metaio_version }}
     - python
     # extras needed for help2man (not when cross compiling)
     - h5py  # [build_platform == target_platform]
@@ -69,7 +71,6 @@ requirements:
     - cfitsio
     - gsl
     - h5py
-    - libframel >={{ framel_version }}
     - lal >={{ lal_version }}
     - lalburst >={{ lalburst_version }}
     - lalframe >={{ lalframe_version }}
@@ -78,6 +79,8 @@ requirements:
     - lalmetaio >={{ lalmetaio_version }}
     - lalpulsar >={{ lalpulsar_version }}
     - lalsimulation >={{ lalsimulation_version }}
+    - libframel >={{ framel_version }}
+    - libmetaio >={{ metaio_version }}
     - ligo-segments
     - numpy
     - pillow
