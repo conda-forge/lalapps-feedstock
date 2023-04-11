@@ -1,12 +1,12 @@
 {% set name = "lalapps" %}
-{% set version = "9.2.0" %}
+{% set version = "9.2.1" %}
 
 # dependency versions
 {% set framel_version = "8.39.2" %}
 {% set lal_version = "7.3.0" %}
 {% set lalframe_version = "3.0.0" %}
 {% set lalmetaio_version = "4.0.0" %}
-{% set lalsimulation_version = "5.0.0" %}
+{% set lalsimulation_version = "5.1.0" %}
 {% set lalburst_version = "2.0.0" %}
 {% set lalinspiral_version = "4.0.0" %}
 {% set lalinference_version = "4.1.0" %}
@@ -19,7 +19,7 @@ package:
 
 source:
   url: https://software.igwn.org/sources/source/lalsuite/{{ name }}-{{ version }}.tar.xz
-  sha256: 6c67979255b696801be2c6f78e43d32f365d6a20cda1c249f0cc6c0726c0fccf
+  sha256: d2b1ba0f2e5e2187b2e0da89b1148eb53d65428645786af289357317f264526e
 
 build:
   error_overdepending: true
