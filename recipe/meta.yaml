@@ -27,7 +27,7 @@ build:
   ignore_run_exports:
     - numpy
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
