@@ -12,6 +12,10 @@ channel_targets:
 - conda-forge main
 gsl:
 - '2.7'
+ldas_tools_framecpp:
+- '2.9'
+libframel:
+- '8.41'
 macos_machine:
 - arm64-apple-darwin20.0.0
 numpy:

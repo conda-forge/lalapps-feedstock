@@ -27,7 +27,7 @@ build:
   ignore_run_exports:
     - numpy
     - python
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
@@ -43,7 +43,7 @@ requirements:
   host:
     - cfitsio
     - gsl
-    - libframel >={{ framel_version }}
+    - libframel
     - liblal >={{ lal_version }}
     - liblalburst >={{ lalburst_version }}
     - liblalframe >={{ lalframe_version }}
