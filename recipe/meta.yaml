@@ -28,7 +28,8 @@ build:
     - numpy
     - python
   number: 2
-  skip: true  # [win]
+  # lalpulsar is py>=39
+  skip: true  # [win or py<39]
 
 requirements:
   build:
