@@ -27,8 +27,9 @@ build:
   ignore_run_exports:
     - numpy
     - python
-  number: 1
-  skip: true  # [win]
+  number: 2
+  # lalpulsar is py>=39
+  skip: true  # [win or py<39]
 
 requirements:
   build:
