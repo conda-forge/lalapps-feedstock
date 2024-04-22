@@ -27,7 +27,7 @@ build:
   ignore_run_exports:
     - numpy
     - python
-  number: 0
+  number: 1
   # lalpulsar is py>=39
   skip: true  # [win or py<39]
 
@@ -35,6 +35,7 @@ requirements:
   build:
     - bc
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - help2man >=1.37  # [build_platform == target_platform]
     - make  # [unix]
     - pkg-config
