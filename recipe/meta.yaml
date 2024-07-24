@@ -27,7 +27,7 @@ build:
   ignore_run_exports:
     - numpy
     - python
-  number: 1
+  number: 2
   # lalpulsar is py>=39
   skip: true  # [win or py<39]
 
@@ -59,7 +59,6 @@ requirements:
     # extras needed for help2man (not when cross compiling)
     - h5py  # [build_platform == target_platform]
     - ligo-segments  # [build_platform == target_platform]
-    - numpy  # [build_platform == target_platform]
     - pillow  # [build_platform == target_platform]
     - python-lal >={{ lal_version }}  # [build_platform == target_platform]
     - python-lalburst >={{ lalburst_version }}  # [build_platform == target_platform]
