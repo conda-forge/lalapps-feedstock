@@ -125,7 +125,7 @@ test:
     - lalapps_power_pipe --help
     - lalapps_random_bank 10 20 10
     - lalapps_randombank --minimum-mass 10 --maximum-mass 20 --number-of-templates 10
-    - lalapps_splitbank --verbose --bank-file P1-TMPLTBANK-0-0.xml --number-of-banks 2 --minimal-match 0.9
+    - lalapps_splitbank --verbose --bank-file P1-TMPLTBANK-0-0.xml --number-of-banks 2 --minimal-match 0.9  # [not osx]
     - lalapps_string_apply_vetoes --help
     - lalapps_string_calc_likelihood --help
     - lalapps_string_contour_plotter --help
