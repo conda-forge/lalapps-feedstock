@@ -3,14 +3,14 @@
 
 # dependency versions
 {% set framel_version = "8.39.2" %}
-{% set lal_version = "7.5.0" %}
+{% set lal_version = "7.6.0" %}
 {% set lalframe_version = "3.0.0" %}
 {% set lalmetaio_version = "4.0.0" %}
-{% set lalsimulation_version = "5.4.0" %}
+{% set lalsimulation_version = "6.0.0" %}
 {% set lalburst_version = "2.0.0" %}
 {% set lalinspiral_version = "5.0.0" %}
 {% set lalinference_version = "4.1.0" %}
-{% set lalpulsar_version = "6.0.0" %}
+{% set lalpulsar_version = "7.0.0" %}
 {% set metaio_version = "8.4.0" %}
 
 package:
@@ -22,11 +22,7 @@ source:
   sha256: f6ec439087f7eec65a830a7af99fb040904287c9cf1e540acbed25146c08116a
 
 build:
-  error_overdepending: true
   error_overlinking: true
-  ignore_run_exports:
-    - numpy
-    - python
   number: 0
   # lalpulsar is py>=39
   skip: true  # [win or py<39]
