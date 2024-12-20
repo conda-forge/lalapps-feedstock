@@ -1,16 +1,16 @@
 {% set name = "lalapps" %}
-{% set version = "10.0.1" %}
+{% set version = "10.0.2" %}
 
 # dependency versions
 {% set framel_version = "8.39.2" %}
 {% set lal_version = "7.6.0" %}
 {% set lalframe_version = "3.0.0" %}
 {% set lalmetaio_version = "4.0.0" %}
-{% set lalsimulation_version = "6.0.0" %}
+{% set lalsimulation_version = "6.1.0" %}
 {% set lalburst_version = "2.0.0" %}
 {% set lalinspiral_version = "5.0.0" %}
 {% set lalinference_version = "4.1.0" %}
-{% set lalpulsar_version = "7.0.0" %}
+{% set lalpulsar_version = "7.1.0" %}
 {% set metaio_version = "8.4.0" %}
 
 package:
@@ -19,11 +19,11 @@ package:
 
 source:
   url: https://software.igwn.org/sources/source/lalsuite/{{ name }}-{{ version }}.tar.xz
-  sha256: f6ec439087f7eec65a830a7af99fb040904287c9cf1e540acbed25146c08116a
+  sha256: 67fa86f7598d52c3903c4e29b1b75839465aa61fe5147be72c46630551e24df1
 
 build:
   error_overlinking: true
-  number: 1
+  number: 0
   # lalburst is py>=310
   skip: true  # [win or py<310]
 
