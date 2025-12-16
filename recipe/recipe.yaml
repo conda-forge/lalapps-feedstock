@@ -1,0 +1,164 @@
+# dependency versions
+schema_version: 1
+
+context:
+  name: lalapps
+  version: 10.1.0
+  framel_version: 8.39.2
+  lal_version: 7.7.0
+  lalframe_version: 3.0.0
+  lalmetaio_version: 4.0.0
+  lalsimulation_version: 6.2.0
+  lalburst_version: 2.0.0
+  lalinspiral_version: 5.0.0
+  lalinference_version: 4.1.0
+  lalpulsar_version: 7.1.0
+  metaio_version: 8.2.0
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://software.igwn.org/sources/source/lalsuite/${{ name }}-${{ version }}.tar.xz
+  sha256: 79cab8ebca42f363de945b3b9cf7919bd25c54c1f1533e59d4655eed66d9d91f
+
+build:
+  dynamic_linking:
+    overlinking_behavior: error
+  number: 2
+  skip:
+    - win
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - bc
+    - make
+    - pkg-config
+    # include help2man only when not cross-compiling
+    - if: build_platform == target_platform
+      then: help2man >=1.37
+    # extras for cross-compiling
+    - if: build_platform != target_platform
+      then:
+        - cross-python_${{ target_platform }}
+        - python
+  host:
+    - cfitsio
+    - gsl
+    - libframel
+    - liblal >=${{ lal_version }}
+    - liblalburst >=${{ lalburst_version }}
+    - liblalframe >=${{ lalframe_version }}
+    - liblalinference >=${{ lalinference_version }}
+    - liblalinspiral >=${{ lalinspiral_version }}
+    - liblalmetaio >=${{ lalmetaio_version }}
+    - liblalpulsar >=${{ lalpulsar_version }}
+    - liblalsimulation >=${{ lalsimulation_version }}
+    - libmetaio >=${{ metaio_version }}
+    - python
+    # extras needed for help2man (not when cross compiling)
+    - if: build_platform == target_platform
+      then:
+        - h5py
+        - igwn-ligolw >=2.1.0
+        - ligo-segments
+        - pillow
+        - python-lal >=${{ lal_version }}
+        - python-lalburst >=${{ lalburst_version }}
+        - python-lalinference >=${{ lalinference_version }}
+        - python-lalinspiral >=${{ lalinspiral_version }}
+        - python-lalframe >=${{ lalframe_version }}
+        - python-lalmetaio >=${{ lalmetaio_version }}
+        - python-lalsimulation >=${{ lalsimulation_version }}
+  run:
+    - cfitsio
+    - gsl
+    - h5py
+    - igwn-ligolw >=2.1.0
+    - lal >=${{ lal_version }}
+    - lalburst >=${{ lalburst_version }}
+    - lalframe >=${{ lalframe_version }}
+    - lalinference >=${{ lalinference_version }}
+    - lalinspiral >=${{ lalinspiral_version }}
+    - lalmetaio >=${{ lalmetaio_version }}
+    - lalpulsar >=${{ lalpulsar_version }}
+    - lalsimulation >=${{ lalsimulation_version }}
+    - libframel >=${{ framel_version }}
+    - libmetaio >=${{ metaio_version }}
+    - ligo-segments
+    - numpy
+    - pillow
+    - python
+
+tests:
+  - python:
+      imports:
+        - lalapps
+        - lalapps.cosmicstring
+  - requirements:
+      run:
+        - ldas-tools-framecpp
+    script:
+      # set up test data (creates Z-ilwd_test_frame-600000000-1.gwf)
+      - framecpp_sample
+      # run --help
+      - lalapps_binj --help
+      - lalapps_blindinj --help
+      - lalapps_cafe --help
+      - lalapps_cbc_stochasticbank --help
+      - lalapps_chirplen --m1 1.4 --m2 1.4 --flow 30
+      - lalapps_coh_PTF_inspiral --help
+      - lalapps_coinj --help
+      - lalapps_cosmicstring_pipe --help
+      - lalapps_effdist --help
+      - lalapps_exc_resp -h
+      - lalapps_fr_ninja --help
+      - lalapps_frextr test.gwf Z-ilwd_test_frame-600000000-1.gwf Z0:RAMPED_INT_2U_1
+      - lalapps_frinfo Z-ilwd_test_frame-600000000-1.gwf
+      - lalapps_frjoin --verbose --output test.gwf Z-ilwd_test_frame-600000000-1.gwf
+      - lalapps_frread Z-ilwd_test_frame-600000000-1.gwf Z0:RAMPED_INT_2U_1
+      - lalapps_frview --help
+      - lalapps_gwf2xml --help
+      - lalapps_inspfrinj --help
+      - lalapps_inspinj --f-lower 30 --waveform IMRPhenomD --gps-start-time 1000000000 --gps-end-time 1000000010 --d-distr volume --l-distr random --m-distr log --i-distr gaussian --incl-std 2 --min-distance 100000 --max-distance 120000 --min-mass1 10 --max-mass1 20 --min-mass2 10 --max-mass2 20 --disable-spin --time-step 2
+      - lalapps_power --help
+      - lalapps_power_likelihood_pipe --help
+      - lalapps_power_pipe --help
+      - lalapps_random_bank 10 20 10
+      - lalapps_randombank --minimum-mass 10 --maximum-mass 20 --number-of-templates 10
+      - if: not osx
+        then: lalapps_splitbank --verbose --bank-file P1-TMPLTBANK-0-0.xml --number-of-banks 2 --minimal-match 0.9
+      - lalapps_string_apply_vetoes --help
+      - lalapps_string_calc_likelihood --help
+      - lalapps_string_contour_plotter --help
+      - lalapps_string_contour_plotter_largeloops --help
+      - lalapps_string_cs_gamma --help
+      - lalapps_string_cs_gamma_largeloops --help
+      - lalapps_string_final --help
+      - lalapps_string_meas_likelihood --help
+      - lalapps_string_plot_binj --help
+      - lalapps_string_plot_likelihood --help
+      - lalapps_tmpltbank --help
+      - lalapps_version
+      # test lalapps_<> stubs for lalpulsar_<> executables
+      - ( set +e; lalapps_knope --help; test $? -ne 127 )
+
+about:
+  summary: LSC Algorithm Library Applications
+  description: |
+    The LSC Algorithm Library Applications for gravitational wave data
+    analysis.  This package contains applications that are built on tools
+    in the LSC Algorithm Library.
+  homepage: https://wiki.ligo.org/Computing/LALSuite
+  repository: https://git.ligo.org/lscsoft/lalsuite/
+  documentation: https://docs.ligo.org/lscsoft/lalsuite/lalapps/
+  license: GPL-2.0-or-later
+  license_file: COPYING
+
+extra:
+  recipe-maintainers:
+    - duncanmmacleod
+    - skymoo
