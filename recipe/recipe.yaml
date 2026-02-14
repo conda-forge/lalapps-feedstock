@@ -64,7 +64,7 @@ requirements:
       then:
         - h5py
         - igwn-ligolw >=2.1.0
-        - ligo-segments
+        - igwn-segments
         - pillow
         - python-lal >=${{ lal_version }}
         - python-lalburst >=${{ lalburst_version }}
@@ -78,6 +78,7 @@ requirements:
     - gsl
     - h5py
     - igwn-ligolw >=2.1.0
+    - igwn-segments
     - lal >=${{ lal_version }}
     - lalburst >=${{ lalburst_version }}
     - lalframe >=${{ lalframe_version }}
@@ -88,7 +89,6 @@ requirements:
     - lalsimulation >=${{ lalsimulation_version }}
     - libframel >=${{ framel_version }}
     - libmetaio >=${{ metaio_version }}
-    - ligo-segments
     - numpy
     - pillow
     - python
