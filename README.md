@@ -17,7 +17,6 @@ The LSC Algorithm Library Applications for gravitational wave data
 analysis.  This package contains applications that are built on tools
 in the LSC Algorithm Library.
 
-
 Current build status
 ====================
 
