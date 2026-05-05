@@ -26,7 +26,7 @@ source:
 build:
   dynamic_linking:
     overlinking_behavior: error
-  number: 2
+  number: 3
   skip:
     - win
 
@@ -41,8 +41,7 @@ requirements:
     - if: build_platform == target_platform
       then: help2man >=1.37
     # extras for cross-compiling
-    - if: build_platform != target_platform
-      then:
+      else:
         - cross-python_${{ target_platform }}
         - python
   host:
@@ -123,7 +122,8 @@ tests:
       - lalapps_frview --help
       - lalapps_gwf2xml --help
       - lalapps_inspfrinj --help
-      - lalapps_inspinj --f-lower 30 --waveform IMRPhenomD --gps-start-time 1000000000 --gps-end-time 1000000010 --d-distr volume --l-distr random --m-distr log --i-distr gaussian --incl-std 2 --min-distance 100000 --max-distance 120000 --min-mass1 10 --max-mass1 20 --min-mass2 10 --max-mass2 20 --disable-spin --time-step 2
+      - lalapps_inspinj --f-lower 30 --waveform IMRPhenomD --gps-start-time 1000000000 --gps-end-time 1000000010 --d-distr volume --l-distr random --m-distr log --i-distr gaussian --incl-std 2 --min-distance 100000 --max-distance 120000 --min-mass1 10 --max-mass1 20 --min-mass2 10 --max-mass2 20 --disable-spin 
+        --time-step 2
       - lalapps_power --help
       - lalapps_power_likelihood_pipe --help
       - lalapps_power_pipe --help
