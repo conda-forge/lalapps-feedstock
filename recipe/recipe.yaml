@@ -26,7 +26,7 @@ source:
 build:
   dynamic_linking:
     overlinking_behavior: error
-  number: 3
+  number: 4
   skip:
     - win
 

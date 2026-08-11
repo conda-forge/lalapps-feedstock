@@ -17,7 +17,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 gsl:
-- '2.7'
+- '2.8'
 libframel:
 - '8.41'
 macos_machine:
