@@ -3,7 +3,7 @@ schema_version: 1
 
 context:
   name: lalapps
-  version: 10.1.0
+  version: "11.0.0"
   framel_version: 8.39.2
   lal_version: 7.7.0
   lalframe_version: 3.0.0
@@ -21,12 +21,12 @@ package:
 
 source:
   url: https://software.igwn.org/sources/source/lalsuite/${{ name }}-${{ version }}.tar.xz
-  sha256: 79cab8ebca42f363de945b3b9cf7919bd25c54c1f1533e59d4655eed66d9d91f
+  sha256: 5df55fd9305e645bf8b9404961cfb8d87d84d3bf37cb2296aa0f485aec61d72a
 
 build:
   dynamic_linking:
     overlinking_behavior: error
-  number: 4
+  number: 0
   skip:
     - win
 
