@@ -1,4 +1,3 @@
-# dependency versions
 schema_version: 1
 
 context:
@@ -106,7 +105,6 @@ tests:
       - lalapps_binj --help
       - lalapps_blindinj --help
       - lalapps_cafe --help
-      - lalapps_cbc_stochasticbank --help
       - lalapps_chirplen --m1 1.4 --m2 1.4 --flow 30
       - lalapps_coh_PTF_inspiral --help
       - lalapps_coinj --help
@@ -114,22 +112,12 @@ tests:
       - lalapps_effdist --help
       - lalapps_exc_resp -h
       - lalapps_fr_ninja --help
-      - lalapps_frextr test.gwf Z-ilwd_test_frame-600000000-1.gwf Z0:RAMPED_INT_2U_1
-      - lalapps_frinfo Z-ilwd_test_frame-600000000-1.gwf
-      - lalapps_frjoin --verbose --output test.gwf Z-ilwd_test_frame-600000000-1.gwf
-      - lalapps_frread Z-ilwd_test_frame-600000000-1.gwf Z0:RAMPED_INT_2U_1
-      - lalapps_frview --help
-      - lalapps_gwf2xml --help
-      - lalapps_inspfrinj --help
-      - lalapps_inspinj --f-lower 30 --waveform IMRPhenomD --gps-start-time 1000000000 --gps-end-time 1000000010 --d-distr volume --l-distr random --m-distr log --i-distr gaussian --incl-std 2 --min-distance 100000 --max-distance 120000 --min-mass1 10 --max-mass1 20 --min-mass2 10 --max-mass2 20 --disable-spin 
+      - lalapps_inspinj --f-lower 30 --waveform IMRPhenomD --gps-start-time 1000000000 --gps-end-time 1000000010 --d-distr volume --l-distr random --m-distr log --i-distr gaussian --incl-std 2 --min-distance 100000 --max-distance 120000 --min-mass1 10 --max-mass1 20 --min-mass2 10 --max-mass2 20 --disable-spin
         --time-step 2
       - lalapps_power --help
       - lalapps_power_likelihood_pipe --help
       - lalapps_power_pipe --help
       - lalapps_random_bank 10 20 10
-      - lalapps_randombank --minimum-mass 10 --maximum-mass 20 --number-of-templates 10
-      - if: not osx
-        then: lalapps_splitbank --verbose --bank-file P1-TMPLTBANK-0-0.xml --number-of-banks 2 --minimal-match 0.9
       - lalapps_string_apply_vetoes --help
       - lalapps_string_calc_likelihood --help
       - lalapps_string_contour_plotter --help
@@ -140,7 +128,6 @@ tests:
       - lalapps_string_meas_likelihood --help
       - lalapps_string_plot_binj --help
       - lalapps_string_plot_likelihood --help
-      - lalapps_tmpltbank --help
       - lalapps_version
 
 about:
