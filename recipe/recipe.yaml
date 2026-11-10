@@ -4,15 +4,16 @@ schema_version: 1
 context:
   name: lalapps
   version: "11.0.0"
+
+  # dependencies
   framel_version: 8.39.2
-  lal_version: 7.7.0
-  lalframe_version: 3.0.0
-  lalmetaio_version: 4.0.0
-  lalsimulation_version: 6.2.0
-  lalburst_version: 2.0.0
-  lalinspiral_version: 5.0.0
-  lalinference_version: 4.1.0
-  lalpulsar_version: 7.1.0
+  lal_version: 8.0.0
+  lalframe_version: 3.1.0
+  lalmetaio_version: 4.1.0
+  lalsimulation_version: 7.0.0
+  lalburst_version: 3.0.0
+  lalinspiral_version: 5.1.0
+  lalinference_version: 5.0.0
   metaio_version: 8.2.0
 
 package:
@@ -54,7 +55,6 @@ requirements:
     - liblalinference >=${{ lalinference_version }}
     - liblalinspiral >=${{ lalinspiral_version }}
     - liblalmetaio >=${{ lalmetaio_version }}
-    - liblalpulsar >=${{ lalpulsar_version }}
     - liblalsimulation >=${{ lalsimulation_version }}
     - libmetaio >=${{ metaio_version }}
     - python
@@ -84,7 +84,6 @@ requirements:
     - lalinference >=${{ lalinference_version }}
     - lalinspiral >=${{ lalinspiral_version }}
     - lalmetaio >=${{ lalmetaio_version }}
-    - lalpulsar >=${{ lalpulsar_version }}
     - lalsimulation >=${{ lalsimulation_version }}
     - libframel >=${{ framel_version }}
     - libmetaio >=${{ metaio_version }}
@@ -143,8 +142,6 @@ tests:
       - lalapps_string_plot_likelihood --help
       - lalapps_tmpltbank --help
       - lalapps_version
-      # test lalapps_<> stubs for lalpulsar_<> executables
-      - ( set +e; lalapps_knope --help; test $? -ne 127 )
 
 about:
   summary: LSC Algorithm Library Applications
